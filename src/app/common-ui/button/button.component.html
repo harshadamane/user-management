@@ -1,0 +1,9 @@
+<button
+  mat-raised-button
+  [color]="this.color"
+  [disabled]="this.disabled"
+  class="button-style"
+  (click)="onButtonClicked($event)"
+>
+  {{ !this.spinner ? this.title : "" }}
+</button>
