@@ -1,0 +1,13 @@
+.main-container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.header {
+  padding: 16px 24px;
+  background: blue;
+  font-size: 16px;
+  font-weight: 400;
+  color: white;
+}
