@@ -5,6 +5,7 @@ import * as UserListAction from './userList.action';
 import { UserListService } from '../services/user-list.service';
 import { UserInfo, UserListApiResponse } from '../interface/userlist';
 import { patch, removeItem, updateItem } from '@ngxs/store/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 export interface UserListStateModel {
   userList: Partial<UserInfo[]>;
@@ -18,7 +19,10 @@ export interface UserListStateModel {
 })
 @Injectable()
 export class UserListState {
-  constructor(private _userListService: UserListService) {}
+  constructor(
+    private _userListService: UserListService,
+    private _snackBar: MatSnackBar
+  ) {}
   @Selector()
   static getUserList(state: UserListStateModel): UserInfo[] {
     return state.userList;
@@ -55,6 +59,11 @@ export class UserListState {
         } as UserInfo),
       })
     );
+    this._snackBar.open(`Updated "${data.firstName}" Details`, 'Done', {
+      duration: 3000,
+      direction: 'ltr',
+      horizontalPosition: 'left',
+    });
     console.log('Updated Store User List:', ctx.getState().userList);
   }
 
@@ -69,6 +78,11 @@ export class UserListState {
         userList: removeItem<UserInfo>((user) => user.id === action.userId),
       })
     );
+    this._snackBar.open(`Deleted User: " ${action.userId} "`, 'Done', {
+      duration: 3000,
+      direction: 'ltr',
+      horizontalPosition: 'left',
+    });
     console.log(
       'Updated Store User List (Deleted Action):',
       ctx.getState().userList
