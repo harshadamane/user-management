@@ -1,0 +1,120 @@
+<div class="mat-table">
+  <mat-accordion displayMode="flat" multi [togglePosition]="'before'">
+    <section matSort class="mat-header-row">
+      <span class="mat-header-cell" mat-sort-header="firstName">Name</span>
+      <span class="mat-header-cell" mat-sort-header="gender">Gender</span>
+      <span class="mat-header-cell" mat-sort-header="phone">Phone</span>
+      <span class="mat-header-cell" mat-sort-header="email">Email</span>
+      <span class="mat-header-cell" mat-sort-header="birthDate"
+        >Birth Date</span
+      >
+      <span class="mat-header-cell" mat-sort-header="university"
+        >University</span
+      >
+    </section>
+
+    <div class="mat-data">
+      <mat-expansion-panel *ngFor="let user of this.userList; let i = index">
+        <mat-expansion-panel-header class="mat-row">
+          <span class="mat-cell">{{ user.firstName }}</span>
+          <span class="mat-cell">{{ user.gender }}</span>
+          <span class="mat-cell">{{ user.birthDate }}</span>
+          <span class="mat-cell">{{ user.phone }}</span>
+          <span class="mat-cell">{{ user.email }}</span>
+          <span class="mat-cell">{{ user.university }}</span>
+        </mat-expansion-panel-header>
+        <form [formGroup]="userDetailsForm">
+          <div formArrayName="userList">
+            <div [formGroupName]="i" class="userInfo-container">
+              <mat-form-field class="user-info">
+                <mat-label>Name</mat-label>
+                <input
+                  matInput
+                  autofocus
+                  placeholder="Name"
+                  formControlName="firstName"
+                  [value]="user.firstName"
+                />
+              </mat-form-field>
+
+              <mat-form-field class="user-info">
+                <mat-label>Gender</mat-label>
+                <mat-select
+                  autofocus
+                  placeholder="Gender"
+                  formControlName="gender"
+                  [value]="user.gender"
+                >
+                  <mat-option value="male">Male</mat-option>
+                  <mat-option value="female">Female</mat-option>
+                  <mat-option value="transgender">Transgender</mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field class="user-info">
+                <mat-label>Birth Date</mat-label>
+                <input
+                  matInput
+                  autofocus
+                  placeholder="birthDate"
+                  formControlName="birthDate"
+                  [value]="user.birthDate"
+                />
+              </mat-form-field>
+
+              <mat-form-field class="user-info">
+                <mat-label>Phone</mat-label>
+                <input
+                  matInput
+                  autofocus
+                  placeholder="Phone"
+                  formControlName="phone"
+                  [value]="user.phone"
+                />
+              </mat-form-field>
+
+              <mat-form-field class="user-info">
+                <mat-label>Email</mat-label>
+                <input
+                  matInput
+                  autofocus
+                  placeholder="Email"
+                  formControlName="email"
+                  [value]="user.email"
+                />
+              </mat-form-field>
+
+              <mat-form-field class="user-info">
+                <mat-label>University</mat-label>
+                <input
+                  matInput
+                  autofocus
+                  placeholder="university"
+                  formControlName="university"
+                  [value]="user.university"
+                />
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="button-set">
+            <app-button
+              type="submit"
+              [title]="'Update'"
+              [disabled]="
+                this.userDetailsForm.controls['userList']['controls'][i]
+                  .status === 'INVALID'
+              "
+              [spinner]="spinner"
+              (onClick)="saveUserInfo(i)"
+            ></app-button>
+            <app-button
+              [title]="'Delete'"
+              (onClick)="deleteUser(i)"
+              [color]="this.COLOR_PALLETE.RED"
+            ></app-button>
+          </div>
+        </form>
+      </mat-expansion-panel>
+    </div>
+  </mat-accordion>
+</div>

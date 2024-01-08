@@ -1,0 +1,81 @@
+$mat-header-row-height: 56px;
+$mat-row-height: 48px;
+$mat-row-horizontal-padding: 24px;
+
+.mat-accordion .mat-header-row {
+  background-color: blue;
+  border: 2px solid none;
+  border-radius: 8px 8px 0 0;
+  padding-left: 3rem;
+  padding-right: 2rem;
+  border-bottom: none;
+  color: white;
+}
+
+.mat-expansion-panel-header.mat-row {
+  border-bottom: none;
+}
+
+.mat-table {
+  display: block;
+  width: 80vw;
+  margin: auto auto;
+}
+.mat-data {
+  border: 1px solid slategray;
+  border-radius: 0 0 8px 8px;
+  max-height: 82vh;
+  overflow: auto;
+}
+
+.button-set {
+  display: flex;
+  gap: 8px;
+}
+
+.mat-header-row {
+  min-height: $mat-header-row-height;
+}
+
+.mat-row {
+  min-height: $mat-row-height;
+}
+
+.mat-row,
+.mat-header-row {
+  display: flex;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  align-items: center;
+  box-sizing: border-box;
+
+  &::after {
+    display: inline-block;
+    min-height: inherit;
+    content: "";
+  }
+}
+
+.mat-cell,
+.mat-header-cell {
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  word-wrap: break-word;
+}
+
+.mat-expansion-panel-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.userInfo-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 12px 8px;
+  .user-info {
+    width: 80%;
+  }
+}
